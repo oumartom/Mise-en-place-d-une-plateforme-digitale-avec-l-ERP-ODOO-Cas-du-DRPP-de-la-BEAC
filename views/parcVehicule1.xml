@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="form_parc_vehicule" model="ir.ui.view">
+            <field name="name">Véhicules.form</field>
+            <field name="model">parc.vehicule</field>
+            <field name="arch" type="xml">
+                <form>
+                    <h1>Enregistrement de véhicule</h1>
+                    <group>
+                        <field name="name"/>
+                        <field name="marque"/>
+                        <field name="modele"/> 
+                        <field name="immatriculation"/>  
+                    </group>
+                    <notebook>
+                        <page name="details" string="Détails">
+                            <group>
+                                <field name="dateEmissionCarteGrise"/>
+                                <field name="dateExpirationCarteGrise"/>
+                            </group>
+                        </page>
+                        <page name="other_information" string="Autres informations">
+                            <group> <field name="descrip"/> </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record> 
+
+        <record id="tree_parc_vehicule" model="ir.ui.view">
+            <field name="name">Véhicules.tree</field>
+            <field name="model">parc.vehicule</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="marque"/>
+                    <field name="modele"/> 
+                    <field name="immatriculation"/>
+                    <field name="dateEmissionCarteGrise"/>
+                    <field name="dateExpirationCarteGrise"/>
+                </tree> 
+            </field> 
+        </record>
+        
+        <record id="kanban_parc_vehicule" model="ir.ui.view">
+            <field name="name">Véhicules.kanban</field>
+            <field name="model">parc.vehicule</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <field name="name"/>
+                                <div>
+                                    <strong>Marque:</strong>
+                                    <field name="marque"/>
+                                </div>
+                                <div>
+                                    <strong>Modèle:</strong>
+                                    <field name="modele"/>
+                                </div>
+                                <div>
+                                    <strong>Immatriculation:</strong>
+                                    <field name="immatriculation"/>
+                                </div>
+                                <div>
+                                    <strong>Date d'émission:</strong>
+                                    <field name="dateEmissionCarteGrise"/>
+                                </div>
+                                <div>
+                                    <strong>Date d'expiration:</strong>
+                                    <field name="dateExpirationCarteGrise"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+
+        <record id="action_parc_vehicule" model="ir.actions.act_window">
+                <field name="name">Véhicules</field>
+                <field name="res_model">parc.vehicule</field>
+                <field name="view_mode">tree,form,kanban</field>
+                <field name="help" type="html">
+                    <p class="o_view_nocontent_smiling_face">Créez votre nouvelle vehicule</p>
+                </field>
+        </record> 
+</odoo>

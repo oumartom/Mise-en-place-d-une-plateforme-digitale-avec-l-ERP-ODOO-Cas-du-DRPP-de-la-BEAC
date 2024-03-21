@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+    <menuitem 
+        id="root_menu" 
+        name="Gestion de véhicules"
+        web_icon="monModuleVehicules,static/description/icon.png"
+    />
+    <menuitem 
+        id="vehicule_menu" 
+        name="Véhicules"
+        parent="monModuleVehicules.root_menu"
+        action="action_parc_vehicule"
+        sequence="10"
+    />
+
+</odoo>
