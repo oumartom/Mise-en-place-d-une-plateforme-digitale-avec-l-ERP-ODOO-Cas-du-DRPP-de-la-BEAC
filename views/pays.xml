@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Vue Liste pour Pays -->
+        <record id="view_pays_tree" model="ir.ui.view">
+            <field name="name">pays.tree</field>
+            <field name="model">management.pays</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue Formulaire pour Pays -->
+        <record id="view_pays_form" model="ir.ui.view">
+            <field name="name">pays.form</field>
+            <field name="model">management.pays</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_pays" model="ir.actions.act_window">
+            <field name="name">Pays</field>
+            <field name="res_model">management.pays</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

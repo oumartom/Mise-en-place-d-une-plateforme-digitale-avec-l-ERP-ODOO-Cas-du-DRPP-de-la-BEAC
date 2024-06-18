@@ -14,5 +14,116 @@
         action="action_parc_vehicule"
         sequence="10"
     />
+    <!-- <menuitem id="parc_vehicule_dashboard_menu" name="Tableau de Bord"
+                  parent="monModuleVehicules.root_menu" action="action_open_dashboard" sequence="5"
+                  
+                  /> -->
+
+    <menuitem id="document_menu"
+                  name="Documents"
+                  parent="monModuleVehicules.root_menu"
+                  action="action_document"
+                  sequence="20"
+                  groups="base.group_system"/>
+    <!-- Sous-menu pour Maintenance -->
+    <menuitem id="menu_maintenance"
+            name="Maintenance"
+            parent="monModuleVehicules.root_menu"
+            action="action_maintenance"
+            sequence="30"
+            groups="base.group_system"
+    />
+    <menuitem id="menu_parc_vehicule_affectation"
+              name="Affectations"
+              parent="monModuleVehicules.root_menu"
+              action="action_parc_vehicule_affectation"
+              groups="base.group_system"/>
+
+    <menuitem id="menu_demande_vehicule"
+              name="Demandes de Véhicules"
+              parent="monModuleVehicules.root_menu"
+              action="action_demande_vehicule"
+              sequence="50"/>
+    <menuitem id="menu_employee"
+              name="Direction"
+              parent="monModuleVehicules.root_menu"
+              action="action_direction"
+              groups="base.group_system"
+              /> 
+    <menuitem id="menu_pays"
+              name="Pays" 
+              parent="menu_employee" 
+              action="action_pays"
+              
+              groups="base.group_system"/>
+    <menuitem id="menu_agence"
+              name="Agences"
+              parent="menu_employee" 
+              action="action_agence"
+             groups="base.group_system"/> 
+     <!-- Menu Item pour Employés -->
+   
+     <!-- <menuitem id="menu_employee1"
+     name="Employés"
+     parent="menu_employee"
+     action="action_employee"
+     /> -->
+     <menuitem id="menu_departement"
+     name="Direction_Ou_Departement"
+     parent="menu_employee"
+     action="action_direction"
+     groups="base.group_system"
+     />
+
+     <menuitem id="menu_service"
+     name="Service"
+     parent="menu_employee"
+     action="action_service"
+     groups="base.group_system"
+     />
+    
+    
+    
+    
+    
+    <menuitem id="menu_reports" name="Rapports" parent="monModuleVehicules.root_menu" sequence="60"/>
+
+              <menuitem id="menu_vehicle_report"
+                        name="Rapports Véhicules"
+                        parent="menu_reports"
+                        sequence="10"/>
+              
+              <menuitem id="menu_maintenance_report"
+                        name="Rapports Maintenance"
+                        parent="menu_reports"
+                        sequence="20"/>
+              
+              <!-- Ici, vous intégrez les menus de vos rapports -->
+              <menuitem id="menu_vehicle_report_graph"
+                        name="Graphique des Véhicules"
+                        parent="menu_vehicle_report"
+                        action="action_vehicle_graph"
+                        sequence="10"/>
+              
+              <menuitem id="menu_vehicle_report_pivot"
+                        name="Pivot des Véhicules"
+                        parent="menu_vehicle_report"
+                        action="action_vehicle_pivot"
+                        sequence="20"/>
+              
+              <menuitem id="menu_maintenance_report_graph"
+                        name="Graphique de Maintenance"
+                        parent="menu_maintenance_report"
+                        action="action_maintenance_graph"
+                        sequence="10"/>
+              
+              <menuitem id="menu_maintenance_report_pivot"
+                        name="Pivot de Maintenance"
+                        parent="menu_maintenance_report"
+                        action="action_maintenance_pivot"
+                        sequence="20"/>
+              
+     
+    
 
 </odoo>

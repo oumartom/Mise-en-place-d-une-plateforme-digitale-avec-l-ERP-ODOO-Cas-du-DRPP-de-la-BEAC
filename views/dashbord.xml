@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+      
+                <!-- Définition des actions -->
+                <record model="ir.actions.act_window" id="action_view_vehicles">
+                    <field name="name">Véhicules</field>
+                    <field name="res_model">parc.vehicule</field>
+                    <field name="view_mode">tree,form</field>
+                </record>
+        
+                <!-- Vue du tableau de bord -->
+                <record id="view_parc_vehicule_dashboard" model="ir.ui.view">
+                    <field name="name">parc.vehicule.dashboard.form</field>
+                    <field name="model">parc.vehicule.dashboard</field>
+                    <field name="arch" type="xml">
+                        <form string="Tableau de Bord du Parc Automobile">
+                            <sheet>
+                                <div class="oe_button_box" name="button_box">
+                                    <!-- Compteurs -->
+                                    <button class="oe_stat_button" name="%(action_view_vehicles)d" type="action" icon="fa-car">
+                                        <field name="total_vehicles" widget="statinfo"/>
+                                        <div>Total Véhicules</div>
+                                    </button>
+                                    
+                               
+                                </div>
+                            </sheet>
+                        </form>
+                    </field>
+                </record>
+           
+
+
+                
+
+        
+        <record model="ir.actions.act_window" id="action_open_dashboard">
+            <field name="name">Tableau de Bord</field>
+            <field name="res_model">parc.vehicule.dashboard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="view_parc_vehicule_document_tree" model="ir.ui.view">
+        <field name="name">parc.vehicule.document.tree</field>
+        <field name="model">parc.vehicule.document</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="type_document"/>
+                <field name="date_emission"/>
+                <field name="date_expiration"/>
+                <field name="vehicule_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_parc_vehicule_document_form" model="ir.ui.view">
+        <field name="name">parc.vehicule.document.form</field>
+        <field name="model">parc.vehicule.document</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="type_document"/>
+                        <field name="date_emission"/>
+                        <field name="date_expiration"/>
+                        <field name="vehicule_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_parc_vehicule_document_kanban" model="ir.ui.view">
+        <field name="name">parc.vehicule.document.kanban</field>
+        <field name="model">parc.vehicule.document</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="type_document"/>
+                <field name="date_emission"/>
+                <field name="date_expiration"/>
+                <field name="vehicule_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong><field name="type_document"/></strong>
+                                <div>Date d'Émission: <field name="date_emission"/></div>
+                                <div>Date d'Expiration: <field name="date_expiration"/></div>
+                                <div>Véhicule: <field name="vehicule_id"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
+    <!-- data/cron.xml -->
+
+        <record id="ir_cron_notif_doc_expiration" model="ir.cron">
+            <field name="name">Notification d'expiration des documents</field>
+            <field name="model_id" ref="model_parc_vehicule_document"/>
+            <field name="state">code</field>
+            <field name="code">model.notifier_expiration_documents()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+        </record>
+    
+
+        <!-- Action pour ouvrir la vue des Documents -->
+        <record id="action_document" model="ir.actions.act_window">
+            <field name="name">Document</field>
+            <field name="res_model">parc.vehicule.document</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créez un nouveau document
+                </p>
+            </field>
+        </record>
+
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Vue Liste pour Agence -->
+        <record id="view_direction_tree" model="ir.ui.view">
+            <field name="name">direction.tree</field>
+            <field name="model">management.direction</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue Formulaire pour Agence -->
+        <record id="view_departement_form" model="ir.ui.view">
+            <field name="name">direction.form</field>
+            <field name="model">management.direction</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_direction" model="ir.actions.act_window">
+            <field name="name">Directions</field>
+            <field name="res_model">management.direction</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

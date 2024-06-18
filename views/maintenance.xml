@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_parc_vehicule_maintenance_tree" model="ir.ui.view">
+        <field name="name">parc.vehicule.maintenance.tree</field>
+        <field name="model">parc.vehicule.maintenance</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date_maintenance"/>
+                <field name="type_maintenance"/>
+                <field name="cout"/>
+                <field name="vehicule_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_parc_vehicule_maintenance_form" model="ir.ui.view">
+        <field name="name">parc.vehicule.maintenance.form</field>
+        <field name="model">parc.vehicule.maintenance</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="date_maintenance"/>
+                        <field name="type_maintenance"/>
+                        <field name="cout"/>
+                        <field name="vehicule_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_maintenance_graph" model="ir.ui.view">
+        <field name="name">maintenance.graph</field>
+        <field name="model">parc.vehicule.maintenance</field>
+        <field name="arch" type="xml">
+            <graph string="Graphique de Maintenance">
+                <field name="type_maintenance" type="row"/>
+                <field name="cout" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    <record id="view_maintenance_pivot" model="ir.ui.view">
+        <field name="name">maintenance.pivot</field>
+        <field name="model">parc.vehicule.maintenance</field>
+        <field name="arch" type="xml">
+            <pivot string="Pivot de Maintenance">
+                <field name="type_maintenance" type="row"/>
+                <field name="cout" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    
+    
+    <record id="action_maintenance_graph" model="ir.actions.act_window">
+        <field name="name">Graphique de Maintenance</field>
+        <field name="res_model">parc.vehicule.maintenance</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_maintenance_graph"/>
+    </record>
+    
+    <record id="action_maintenance_pivot" model="ir.actions.act_window">
+        <field name="name">Pivot de Maintenance</field>
+        <field name="res_model">parc.vehicule.maintenance</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_maintenance_pivot"/>
+    </record>
+    
+
+    <!-- Action pour ouvrir la vue des Véhicules -->
+    <record id="action_maintenance" model="ir.actions.act_window">
+        <field name="name">Maintenance</field>
+        <field name="res_model">parc.vehicule.maintenance</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créez un nouvelle Maintenance
+            </p>
+        </field>
+    </record>
+</odoo>

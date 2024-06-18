@@ -1,0 +1,11 @@
+<record id="group_cadre_moyen" model="res.groups">
+    <field name="name">Cadre Moyen</field>
+    <field name="users" eval="[(4, ref('base.user_demo'))]"/>
+</record>
+
+<record id="rule_access_cadre_moyen" model="ir.rule">
+    <field name="name">Access Rule for Cadre Moyen</field>
+    <field name="model_id" ref="model_gestion_vehicule_demande"/>
+    <field name="domain_force">[('user_id.departement_id', '=', user.departement_id.id)]</field>
+    <field name="groups" eval="[(4, ref('group_cadre_moyen'))]"/>
+</record>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   
+<!-- Vue formulaire -->
+<record id="view_demande_vehicule_form" model="ir.ui.view">
+    <field name="name">parc.vehicule.demande.form</field>
+    <field name="model">parc.vehicule.demande</field>
+    <field name="arch" type="xml">
+        <form>
+            <header>
+                <button string="Approuver" type="object" name="action_approve"
+                groups="base.group_system"
+                attrs="{'invisible': [('etat', '!=', 'nouveau')]}"/>
+                <button string="Refuser" type="object" name="action_refuse"
+                groups="base.group_system"
+                attrs="{'invisible': [('etat', '!=', 'nouveau')]}"/>
+
+
+            </header>
+           
+            <sheet>
+                <group>
+                    <field name="demandeur_id"/>
+                    <field name="vehicule_id"/>
+                    <field name="date_demande" readonly="1"/>
+                    <field name="date_debut"/>
+                    <field name="date_fin"/>
+                    <field name="raison"/>
+                    <field name="etat" groups="base.group_system" readonly="0"/>
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+
+            </div>
+        </form>
+    </field>
+</record>
+
+    <!-- Vue liste -->
+    <record id="view_demande_vehicule_tree" model="ir.ui.view">
+        <field name="name">parc.vehicule.demande.tree</field>
+        <field name="model">parc.vehicule.demande</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="demandeur_id"/>
+                <field name="vehicule_id"/>
+                <field name="date_debut"/>
+                <field name="date_fin"/>
+                <field name="etat"/>
+            </tree>
+        </field>
+    </record>
+    <record id="demande_vehicule_user_rule" model="ir.rule">
+        <field name="name">Demande Vehicule User Rule</field>
+        <field name="model_id" ref="model_parc_vehicule_demande"/>
+        <field name="domain_force">[('demandeur_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Les administrateurs peuvent voir toutes les demandes -->
+    <record id="demande_vehicule_manager_rule" model="ir.rule">
+        <field name="name">Demande Vehicule Manager Rule</field>
+        <field name="model_id" ref="model_parc_vehicule_demande"/>
+        <field name="domain_force">[]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+    <record id="action_demande_vehicule" model="ir.actions.act_window">
+        <field name="name">Demandes de Véhicules</field>
+        <field name="res_model">parc.vehicule.demande</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_demande_vehicule_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Demandez un véhicule pour vos besoins professionnels.
+            </p>
+        </field>
+    </record>
+</odoo>

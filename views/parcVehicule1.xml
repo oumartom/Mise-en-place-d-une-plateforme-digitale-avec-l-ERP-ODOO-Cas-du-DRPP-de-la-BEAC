@@ -1,16 +1,163 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_parc_vehicule_tree" model="ir.ui.view">
+        <field name="name">parc.vehicule.tree</field>
+        <field name="model">parc.vehicule</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="marque"/>
+                <field name="modele"/>
+                <field name="immatriculation"/>
+                <field name="pays_id"/>
+                <field name="agence_id"/>
+                <field name="Statut"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_parc_vehicule_form" model="ir.ui.view">
+        <field name="name">parc.vehicule.form</field>
+        <field name="model">parc.vehicule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="marque"/>
+                        <field name="modele"/>
+                        <field name="immatriculation"/>
+                        <field name="pays_id"/>
+                        <field name="agence_id"/>
+                        <field name="Statut"/>
+                    </group>
+                    <notebook>
+                        <page string="Documents">
+                            <field name="documents_ids">
+                                <tree>
+                                    <field name="type_document"/>
+                                    <field name="date_emission"/>
+                                    <field name="date_expiration"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_parc_vehicule_kanban" model="ir.ui.view">
+        <field name="name">parc.vehicule.kanban</field>
+        <field name="model">parc.vehicule</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="marque"/>
+                <field name="modele"/>
+                <field name="pays_id"/>
+                <field name="agence_id"/>
+                <field name="Statut"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong><field name="name"/></strong>
+                                <div><field name="marque"/> - <field name="modele"/></div>
+                                <div>Status: <field name="Statut"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="view_vehicle_graph" model="ir.ui.view">
+        <field name="name">vehicule.graph</field>
+        <field name="model">parc.vehicule</field>
+        <field name="arch" type="xml">
+            <graph string="Graphique des Véhicules">
+                <field name="name" type="row"/>
+                <field name="marque" type="row"/>
+                <field name="Statut" type="col"/>
+                
+            </graph>
+        </field>
+    </record>
+    <record id="view_vehicle_pivot" model="ir.ui.view">
+        <field name="name">vehicle.pivot</field>
+        <field name="model">parc.vehicule</field>
+        <field name="arch" type="xml">
+            <pivot string="Véhicules">
+                <field name="name" type="row"/>
+                <field name="marque" type="row"/>
+                <field name="modele" type="row"/>
+                <!-- Remplacez 'annee' par un champ numérique approprié de votre modèle -->
+                
+            </pivot>
+        </field>
+    </record>
+    
+    <record id="action_vehicle_graph" model="ir.actions.act_window">
+        <field name="name">Graphique des Véhicules</field>
+        <field name="res_model">parc.vehicule</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_vehicle_graph"/>
+    </record>
+    
+    <record id="action_vehicle_pivot" model="ir.actions.act_window">
+        <field name="name">Pivot des Véhicules</field>
+        <field name="res_model">parc.vehicule</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_vehicle_pivot"/>
+    </record>
+    <!-- <record id="vehicle_access_rule_user" model="ir.rule">
+        <field name="name">Vehicule Access Rule for Users</field>
+        <field name="model_id" ref="model_parc_vehicule"/>
+        <field name="domain_force">[('agence_id', '=', user.agence_id.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record> -->
+    
+    
+
+    <record id="action_parc_vehicule" model="ir.actions.act_window">
+        <field name="name">Véhicules</field>
+        <field name="res_model">parc.vehicule</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Créez votre nouvelle vehicule</p>
+        </field>
+</record> 
+</odoo>
+
+
+
+
+<!-- <?xml version="1.0" encoding="utf-8"?>
 <odoo>
      <record id="form_parc_vehicule" model="ir.ui.view">
             <field name="name">Véhicules.form</field>
             <field name="model">parc.vehicule</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        
+                        <button string="Vérifier les Cartes Grises"
+                                type="object"
+                                name="cron_verifier_expiration_cartes_grises"
+                                class="oe_highlight"/>
+                    </header>
                     <h1>Enregistrement de véhicule</h1>
                     <group>
                         <field name="name"/>
                         <field name="marque"/>
                         <field name="modele"/> 
-                        <field name="immatriculation"/>  
+                        <field name="immatriculation"/>
+                        <field name="Statut"/>  
                     </group>
                     <notebook>
                         <page name="details" string="Détails">
@@ -36,6 +183,7 @@
                     <field name="marque"/>
                     <field name="modele"/> 
                     <field name="immatriculation"/>
+                    <field name="Statut"/> 
                     <field name="dateEmissionCarteGrise"/>
                     <field name="dateExpirationCarteGrise"/>
                 </tree> 
@@ -64,6 +212,10 @@
                                     <field name="immatriculation"/>
                                 </div>
                                 <div>
+                                    <strong>Statut:</strong>
+                                    <field name="Statut"/>
+                                </div>
+                                <div>
                                     <strong>Date d'émission:</strong>
                                     <field name="dateEmissionCarteGrise"/>
                                 </div>
@@ -78,6 +230,20 @@
             </field>
         </record>
         
+       
+        <record id="ir_cron_verifier_expiration_cartes_grises" model="ir.cron">
+            <field name="name">Vérifier Expiration Cartes Grises</field>
+            <field name="model_id" ref="model_parc_vehicule"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_verifier_expiration_cartes_grises()</field>
+            <field name="active" eval="True"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
 
         <record id="action_parc_vehicule" model="ir.actions.act_window">
                 <field name="name">Véhicules</field>
@@ -87,4 +253,4 @@
                     <p class="o_view_nocontent_smiling_face">Créez votre nouvelle vehicule</p>
                 </field>
         </record> 
-</odoo>
+</odoo> -->

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_parc_vehicule_affectation_tree" model="ir.ui.view">
+        <field name="name">parc.vehicule.affectation.tree</field>
+        <field name="model">parc.vehicule.affectation</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="utilisateur_id"/>
+                <field name="vehicule_id"/>
+                <field name="date_debut"/>
+                <field name="date_fin"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_parc_vehicule_affectation_form" model="ir.ui.view">
+        <field name="name">parc.vehicule.affectation.form</field>
+        <field name="model">parc.vehicule.affectation</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="utilisateur_id"/>
+                        <field name="vehicule_id"/>
+                        <field name="date_debut"/>
+                        <field name="date_fin"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_parc_vehicule_affectation" model="ir.actions.act_window">
+        <field name="name">Affectations</field>
+        <field name="res_model">parc.vehicule.affectation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
